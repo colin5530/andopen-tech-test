@@ -7,16 +7,29 @@ const initialState = {
   totalUsers: userData.userData,
   visibleUsers: userData.userData,
   spendFilterValue: [0, 5000],
+  regionFilterValue: [],
 };
+
+const applyFilters = ({totalUsers, spendFilterValue, regionFilterValue}) => {
+  return totalUsers.filter((user) => {
+    return user.spend >= spendFilterValue[0] && user.spend <= spendFilterValue[1];
+  }).filter((user) => {
+    if (regionFilterValue.length === 0) return true;
+    return [...regionFilterValue].includes(user.region);
+  });
+}
 
 const UserDataReducer = (state, action) => {
   switch (action.type) {
     case 'updateSpendFilter': {
-      const filteredUsers = state.totalUsers.filter((user) => {
-        return user.spend >= action.payload[0] && user.spend <= action.payload[1];
-      })
+      const filteredUsers = applyFilters(Object.assign({...state}, {spendFilterValue: action.payload}));
 
       return Object.assign({...state}, {visibleUsers: filteredUsers, spendFilterValue: action.payload})
+    }
+    case 'updateRegionFilter': {
+      const filteredUsers = applyFilters(Object.assign({...state}, {regionFilterValue: action.payload}));
+
+      return Object.assign({...state}, {visibleUsers: filteredUsers, regionFilterValue: action.payload})
     }
     case 'updateVisibleUsers': {
       return Object.assign({...state}, {visibleUsers: action.payload});
@@ -49,8 +62,17 @@ const useSpendFilter = () => {
   return {spendFilterValue: context.state.spendFilterValue, setSpendFilterValue: (payload) => context.dispatch({ type: 'updateSpendFilter', payload})};
 }
 
+const useRegionFilter = () => {
+  const context = useContext(UserDataContext);
+  if (context === undefined) {
+    throw new Error('useRegionFilter must be used within a UserDataProvider');
+  }
+  return {regionFilterValue: context.state.regionFilterValue, setRegionFilterValue: (payload) => context.dispatch({ type: 'updateRegionFilter', payload})};
+}
+
 export {
   UserDataProvider,
   useUserData,
   useSpendFilter,
+  useRegionFilter,
 }
