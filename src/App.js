@@ -2,8 +2,9 @@ import React from 'react';
 import FilterBar from './components/FilterBar';
 import ChartContainer from './components/ChartContainer';
 import TableContainer from './components/TableContainer';
-import './App.css';
 import { UserDataProvider } from './userDataContext';
+import "antd/dist/antd.css";
+import './App.css';
 
 const App = () => {
   return (
