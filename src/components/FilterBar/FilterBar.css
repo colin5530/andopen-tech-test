@@ -1,0 +1,22 @@
+.c-FilterBar {
+  display: inline-flex;
+  width: 100%;
+}
+
+.c-FilterBar-slider-container {
+  flex-grow: 3;
+  margin: 2px;
+  padding: 5px;
+}
+
+.c-FilterBar-region-container {
+  flex-grow: 1;
+  margin: 2px;
+  padding: 5px;
+}
+
+.c-FilterBar-gender-container {
+  flex-grow: 2;
+  margin: 2px;
+  padding: 5px;
+}
