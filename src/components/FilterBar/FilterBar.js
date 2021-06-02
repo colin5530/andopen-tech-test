@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Select, Slider } from 'antd';
-import { useRegionFilter, useSpendFilter } from '../../userDataContext';
+import { useGenderFilter, useRegionFilter, useSpendFilter } from '../../userDataContext';
 import './FilterBar.css';
 
 const { Option } = Select;
@@ -9,6 +9,7 @@ const FilterBar = () => {
   const className = 'c-FilterBar';
   const {setSpendFilterValue} = useSpendFilter();
   const {setRegionFilterValue} = useRegionFilter();
+  const {setGenderFilterValue} = useGenderFilter();
   const [sliderValue, setSliderValue] = useState([0, 5000]);
   const regions = ['EMEA', 'APAC', 'NAM', 'LATAM'];
 
@@ -24,9 +25,14 @@ const FilterBar = () => {
     setRegionFilterValue(val);
   }
 
+  const handleGenderChange = (val) => {
+    setGenderFilterValue(val);
+  }
+
   return (
     <div className={`${className}`}>
       <div className={`${className}-slider-container`}>
+        Spend
         <Slider
           range
           min={0}
@@ -51,6 +57,16 @@ const FilterBar = () => {
       </div>
       <div className={`${className}-gender-container`}>
         Gender
+        <Select
+          mode="multiple"
+          style={{ width: '100%' }}
+          placeholder="Gender"
+          onChange={handleGenderChange}
+        >
+          {['MALE', 'FEMALE'].map((gender) => (
+            <Option key={gender}>{gender}</Option>
+          ))}
+        </Select>
       </div>
     </div>
   )
