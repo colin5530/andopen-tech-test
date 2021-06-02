@@ -6,24 +6,24 @@ Chart.register(CategoryScale, LineController, LineElement, PointElement, LinearS
 
 const ChartContainer = () => {
   const chartRef = useRef(null);
-  const {visibleUsers, setVisibleUsers} = useUserData();
+  const {visibleUsers} = useUserData();
   
   useEffect(() => {
     const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    const data = labels.map((label, index) => {
+    const monthlyData = labels.map((label, index) => {
       return visibleUsers.filter(user => user.birthday === (index + 1)).length;
     });
 
-    const cumulativeData = data.map((sum => val => sum += (val * 5))(0));
+    const cumulativeData = monthlyData.map((sum => val => sum += (val * 5))(0));
 
-    new Chart(chartRef.current, {
+    const chart = new Chart(chartRef.current.getContext('2d'), {
       type: 'line',
       data: {
           labels,
           datasets: [{
               label: '# of Users',
-              data,
+              data: monthlyData,
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
@@ -64,6 +64,8 @@ const ChartContainer = () => {
         }]
       },
     });
+
+    return () => chart.destroy();
   }, [visibleUsers]);
 
   return (
