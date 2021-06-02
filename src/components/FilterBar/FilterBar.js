@@ -1,24 +1,31 @@
 import React, { useState } from 'react';
 import { Slider } from 'antd';
-import { useUserData } from '../../userDataContext';
+import { useSpendFilter } from '../../userDataContext';
 import './FilterBar.css';
 
 const FilterBar = () => {
   const className = 'c-FilterBar';
-  const {visibleUsers, setVisibleUsers} = useUserData();
-  const [sliderValue, setSliderValue] = useState(500);
+  const {setSpendFilterValue} = useSpendFilter();
+  const [sliderValue, setSliderValue] = useState([0, 5000]);
+
+  const handleSliderChange = (val) => {
+    setSliderValue(val);
+  }
+
+  const handleAfterSliderChange = (val) => {
+    setSpendFilterValue(val);
+  }
 
   return (
     <div className={`${className}`}>
       <div className={`${className}-slider-container`}>
         <Slider
           range
-          defaultValue={[500, 5000]}
           min={0}
           max={5000}
-          onChange={(val) => {
-            setSliderValue(val);
-          }}
+          value={[...sliderValue]}
+          onChange={handleSliderChange}
+          onAfterChange={handleAfterSliderChange}
         />
       </div>
       <div className={`${className}-region-container`}>
