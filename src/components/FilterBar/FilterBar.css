@@ -29,3 +29,7 @@
 .c-FilterBar-filter-input {
   margin: 10px 0;
 }
+
+.c-FilterBar-gender-radios {
+  vertical-align: middle;
+}
