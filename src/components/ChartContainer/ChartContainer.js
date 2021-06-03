@@ -10,8 +10,6 @@ const ChartContainer = () => {
   const {visibleUsers} = useUserData();
   
   useEffect(() => {
-    // const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
     const monthlyData = months.map((label, index) => {
       return visibleUsers.filter(user => user.birthday === (index + 1)).length;
     });
