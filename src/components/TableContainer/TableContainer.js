@@ -2,6 +2,7 @@ import React from 'react';
 import { Table } from 'antd';
 import { useUserData } from '../../userDataContext';
 import { months } from '../../utils';
+import './TableContainer.css';
 
 const TableContainer = () => {
   const {visibleUsers} = useUserData();
@@ -41,8 +42,7 @@ const TableContainer = () => {
   ];
 
   return (
-    <div>
-      Table
+    <div className='c-TableContainer'>
       <Table dataSource={visibleUsers} columns={columns} />
     </div>
   )

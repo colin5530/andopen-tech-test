@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { CategoryScale, Chart, LineController, LineElement, PointElement, LinearScale, Title } from 'chart.js'
 import { useUserData } from '../../userDataContext';
 import { months } from '../../utils';
+import './ChartContainer.css';
 
 Chart.register(CategoryScale, LineController, LineElement, PointElement, LinearScale, Title);
 
@@ -68,7 +69,7 @@ const ChartContainer = () => {
   }, [visibleUsers]);
 
   return (
-    <div>
+    <div className='c-ChartContainer'>
       <canvas ref={chartRef} id="myChart" width="400" height="200"></canvas>
     </div>
   )
