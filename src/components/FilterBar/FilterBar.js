@@ -32,18 +32,20 @@ const FilterBar = () => {
   return (
     <div className={`${className}`}>
       <div className={`${className}-slider-container`}>
-        Spend
+        <span className={`${className}-filter-title`}>Spend: </span>{`€${sliderValue[0]} - €${sliderValue[1]}`}
         <Slider
           range
           min={0}
           max={5000}
+          marks={{ 0: '€0', 5000: '€5000' }}
           value={[...sliderValue]}
           onChange={handleSliderChange}
           onAfterChange={handleAfterSliderChange}
+          tipFormatter={(value) => `€${value}`}
         />
       </div>
       <div className={`${className}-region-container`}>
-        Region
+      <span className={`${className}-filter-title`}>Region</span>
         <Select
           mode="multiple"
           style={{ width: '100%' }}
@@ -56,7 +58,7 @@ const FilterBar = () => {
         </Select>
       </div>
       <div className={`${className}-gender-container`}>
-        Gender
+      <span className={`${className}-filter-title`}>Gender</span>
         <Select
           mode="multiple"
           style={{ width: '100%' }}
