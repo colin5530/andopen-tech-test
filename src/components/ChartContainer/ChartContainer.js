@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { CategoryScale, Chart, LineController, LineElement, PointElement, LinearScale, Title } from 'chart.js'
 import { useUserData } from '../../userDataContext';
+import { months } from '../../utils';
 
 Chart.register(CategoryScale, LineController, LineElement, PointElement, LinearScale, Title);
 
@@ -9,9 +10,9 @@ const ChartContainer = () => {
   const {visibleUsers} = useUserData();
   
   useEffect(() => {
-    const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    // const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    const monthlyData = labels.map((label, index) => {
+    const monthlyData = months.map((label, index) => {
       return visibleUsers.filter(user => user.birthday === (index + 1)).length;
     });
 
@@ -20,7 +21,7 @@ const ChartContainer = () => {
     const chart = new Chart(chartRef.current.getContext('2d'), {
       type: 'line',
       data: {
-          labels,
+          labels: months,
           datasets: [{
               label: '# of Users',
               data: monthlyData,
