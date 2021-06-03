@@ -6,3 +6,9 @@
   border-radius: 5px;
   box-shadow: 3px 3px 5px #aaa;
 }
+
+.App-title {
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: underline;
+}
