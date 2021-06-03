@@ -7,8 +7,8 @@
   font-weight: 700;
 }
 
-.c-FilterBar-slider-container {
-  flex-grow: 3;
+.c-FilterBar-spend-container {
+  flex-grow: 2;
   margin: 2px;
   padding: 10px;
 }
@@ -17,10 +17,15 @@
   flex-grow: 1;
   margin: 2px;
   padding: 10px;
+  width: 20%;
 }
 
 .c-FilterBar-gender-container {
-  flex-grow: 2;
+  flex-grow: 1;
   margin: 2px;
   padding: 10px;
+}
+
+.c-FilterBar-filter-input {
+  margin: 10px 0;
 }

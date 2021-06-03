@@ -18,8 +18,8 @@ const applyFilters = ({totalUsers, spendFilterValue, regionFilterValue, genderFi
     if (regionFilterValue.length === 0) return true;
     return [...regionFilterValue].includes(user.region);
   }).filter((user) => {
-    if (genderFilterValue.length === 0) return true;
-    return [...genderFilterValue].includes(user.gender);
+    if (genderFilterValue === 'ALL') return true;
+    return genderFilterValue === user.gender;
   });
 }
 
