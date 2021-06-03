@@ -69,7 +69,6 @@ const ChartContainer = () => {
 
   return (
     <div>
-      Chart
       <canvas ref={chartRef} id="myChart" width="400" height="200"></canvas>
     </div>
   )
