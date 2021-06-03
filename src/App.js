@@ -10,6 +10,9 @@ const App = () => {
   return (
     <UserDataProvider>
       <div className="App">
+        <div className='App-title'>
+          Birthday Coupon Cost Analysis
+        </div>
         <FilterBar />
         <ChartContainer />
         <TableContainer />

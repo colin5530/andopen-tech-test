@@ -43,7 +43,11 @@ const TableContainer = () => {
 
   return (
     <div className='c-TableContainer'>
-      <Table dataSource={visibleUsers} columns={columns} />
+      <Table
+        columns={columns} 
+        dataSource={visibleUsers}
+        rowKey={(row) => row.id}
+      />
     </div>
   )
 }
