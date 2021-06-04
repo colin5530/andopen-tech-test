@@ -1,76 +1,41 @@
-import React, { useEffect, useRef } from 'react';
-import { CategoryScale, Chart, LineController, LineElement, PointElement, LinearScale, Title } from 'chart.js'
+import React from 'react';
+import { Line } from 'react-chartjs-2';
 import { useUserData } from '../../userDataContext';
 import { months } from '../../utils';
 import './ChartContainer.css';
 
-Chart.register(CategoryScale, LineController, LineElement, PointElement, LinearScale, Title);
-
 const ChartContainer = () => {
-  const chartRef = useRef(null);
   const {visibleUsers} = useUserData();
+
   
-  useEffect(() => {
-    const monthlyData = months.map((label, index) => {
-      return visibleUsers.filter(user => user.birthday === (index + 1)).length;
-    });
+  const monthlyData = months.map((label, index) => {
+    return visibleUsers.filter(user => user.birthday === (index + 1)).length;
+  });
 
-    const cumulativeData = monthlyData.map((sum => val => sum += (val * 5))(0));
+  const cumulativeData = monthlyData.map((sum => val => sum += (val * 5))(0));
 
-    const chart = new Chart(chartRef.current.getContext('2d'), {
-      type: 'line',
-      data: {
-          labels: months,
-          datasets: [{
-              label: '# of Users',
-              data: monthlyData,
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-              borderWidth: 1
-          }, {
-            label: 'Cumulative',
-            data: cumulativeData,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-      },
-    });
-
-    return () => chart.destroy();
-  }, [visibleUsers]);
+  const data = {
+    labels: months,
+    datasets: [
+      {
+        label: '# of Users',
+        data: monthlyData,
+        fill: false,
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgba(255, 99, 132, 0.2)',
+      }, {
+        label: 'Cumulative',
+        data: cumulativeData,
+        fill: false,
+        backgroundColor: 'rgb(132, 99, 255)',
+        borderColor: 'rgba(132, 99, 255, 0.2)',
+      }
+    ],
+  };
 
   return (
     <div className='c-ChartContainer'>
-      <canvas ref={chartRef} id="myChart" width="400" height="200"></canvas>
+      <Line data={data} />
     </div>
   )
 };
