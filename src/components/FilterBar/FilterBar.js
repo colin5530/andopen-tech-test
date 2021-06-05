@@ -32,7 +32,8 @@ const FilterBar = () => {
   return (
     <div className={`${className}`}>
       <div className={`${className}-spend-container`}>
-        <span className={`${className}-filter-title`}>Spend: </span>{`€${sliderValue[0]} - €${sliderValue[1]}`}
+        <span className={`${className}-filter-title`}>Spend: </span>
+        <span data-testid='min-value'>€{sliderValue[0]}</span> - <span data-testid='max-value'>€{sliderValue[1]}</span>
         <div className={`${className}-filter-input`}>
           <Slider
             className={`${className}-spend-slider`}
@@ -74,7 +75,7 @@ const FilterBar = () => {
             defaultValue='ALL'
           >
             <Radio value='ALL'>All</Radio>
-            <Radio value='MALE'>Male</Radio>
+            <Radio value='MALE' onKeyDown={(e) => console.log('e', e)}>Male</Radio>
             <Radio value='FEMALE'>Female</Radio>
           </Radio.Group>
         </div>

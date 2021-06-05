@@ -14,7 +14,8 @@ global.matchMedia = global.matchMedia || function () {
 global.ResizeObserver = global.ResizeObserver || function () {
   return {
     addListener: jest.fn(),
-    removeListener: jest.fn(),
+    disconnect: jest.fn(),
     observe: jest.fn(),
+    removeListener: jest.fn(),
   };
 };

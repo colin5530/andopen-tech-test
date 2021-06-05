@@ -8,7 +8,7 @@ const initialState = {
   visibleUsers: userData.userData,
   spendFilterValue: [0, 5000],
   regionFilterValue: [],
-  genderFilterValue: [],
+  genderFilterValue: 'ALL',
 };
 
 const applyFilters = ({totalUsers, spendFilterValue, regionFilterValue, genderFilterValue}) => {
