@@ -1,9 +1,19 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import renderer from 'react-test-renderer';
 import FilterBar from './';
 import { UserDataProvider } from '../../userDataContext';
 
 describe('FilterBar', () => {
-  test('renders FilterBar', () => {
+  it('renders correctly', () => {
+    const tree = renderer.create(
+      <UserDataProvider>
+        <FilterBar />
+      </UserDataProvider>
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders FilterBar with all 3 filters', () => {
     render(
       <UserDataProvider>
         <FilterBar />
@@ -32,7 +42,7 @@ describe('FilterBar', () => {
   });
 
   describe('Spend', () => {
-    test('renders title, values and slider with 2 handles', () => {
+    it('renders title, values and slider with 2 handles', () => {
       render(
         <UserDataProvider>
           <FilterBar />
@@ -51,7 +61,7 @@ describe('FilterBar', () => {
       expect(maxValueElement).toBeInTheDocument();
     });
 
-    // test('moving slider handles updates values', () => {
+    // it('moving slider handles updates values', () => {
     //   render(
     //     <UserDataProvider>
     //       <FilterBar />
@@ -108,5 +118,4 @@ describe('FilterBar', () => {
 
     // })
   });
-
 });
