@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChartContainer renders correctly 1`] = `
+<div
+  className="c-ChartContainer"
+>
+  <canvas
+    data-testid="canvas"
+    height={150}
+    onClick={[Function]}
+    role="img"
+    width={300}
+  />
+</div>
+`;
