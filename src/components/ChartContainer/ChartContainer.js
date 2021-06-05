@@ -5,6 +5,7 @@ import { months } from '../../utils';
 import './ChartContainer.css';
 
 const ChartContainer = () => {
+  // Pull list of visible users from context
   const {visibleUsers} = useUserData();
 
   
@@ -12,6 +13,7 @@ const ChartContainer = () => {
     return visibleUsers.filter(user => user.birthday === (index + 1)).length;
   });
 
+  // Cumulative calculation taking advantage of JS closure to sum all values in an array
   const cumulativeData = monthlyData.map((sum => val => sum += (val * 5))(0));
 
   const data = {

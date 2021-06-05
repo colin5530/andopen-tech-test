@@ -1,6 +1,10 @@
 import React, { useContext, useReducer } from 'react';
 import userData from './userData.json';
 
+/*
+This is where we store and deal with the app's global state
+*/
+
 const UserDataContext = React.createContext();
 
 const initialState = {
@@ -11,6 +15,9 @@ const initialState = {
   genderFilterValue: [],
 };
 
+
+
+// Function to apply all filters to the userList
 const applyFilters = ({totalUsers, spendFilterValue, regionFilterValue, genderFilterValue}) => {
   return totalUsers.filter((user) => {
     return user.spend >= spendFilterValue[0] && user.spend <= spendFilterValue[1];
@@ -49,12 +56,18 @@ const UserDataReducer = (state, action) => {
   }
 }
 
+
+
+// Using context a Provider is needed to bind the state to the app
 const UserDataProvider = ({children}) => {
   const [state, dispatch] = useReducer(UserDataReducer, initialState);
   const value = { state, dispatch };
   return <UserDataContext.Provider value={value}>{children}</UserDataContext.Provider>
 }
 
+
+
+// Functions to help make interacting with context easier
 const useUserData = () => {
   const context = useContext(UserDataContext);
   if (context === undefined) {

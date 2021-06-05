@@ -5,6 +5,7 @@ import { months } from '../../utils';
 import './TableContainer.css';
 
 const TableContainer = () => {
+  // Pull list of visible users from context
   const {visibleUsers} = useUserData();
   
   const columns = [
@@ -18,6 +19,7 @@ const TableContainer = () => {
       title: 'Birthday',
       dataIndex: 'birthday',
       key: 'birthday',
+      // Render function to convert birthday integer to a user-friendly shortened month label
       render: (a) => (<>{months[a]}</>),
       sorter: (a, b) => a.birthday - b.birthday,
     },

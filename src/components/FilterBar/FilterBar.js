@@ -7,6 +7,7 @@ const { Option } = Select;
 
 const FilterBar = () => {
   const className = 'c-FilterBar';
+  // Get functions for updating filters from context
   const {setSpendFilterValue} = useSpendFilter();
   const {setRegionFilterValue} = useRegionFilter();
   const {setGenderFilterValue} = useGenderFilter();
@@ -18,14 +19,17 @@ const FilterBar = () => {
   }
 
   const handleAfterSliderChange = (val) => {
+    // Update spend filter in context
     setSpendFilterValue(val);
   }
 
   const handleRegionChange = (val) => {
+    // Update region filter in context
     setRegionFilterValue(val);
   }
 
   const handleGenderChange = (e) => {
+    // Update gender filter in context
     setGenderFilterValue(e.target.value);
   }
 
