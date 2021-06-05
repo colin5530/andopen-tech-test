@@ -9,6 +9,7 @@ import './App.css';
 const App = () => {
   return (
     <UserDataProvider>
+      {/* Wrap the entire app in the context provider so it is available everywhere */}
       <div className="App">
         <div className='App-title'>
           Birthday Coupon Cost Analysis
